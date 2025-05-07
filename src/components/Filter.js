@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Filter({ onCategoryChange }) {
+function Filter({ search, onSearchChange }) {
+  const [inputValue, setInputValue] = useState(search);
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setInputValue(value);
+    onSearchChange(value);
+  };
+
   return (
     <div className="Filter">
-      <input type="text" name="search" placeholder="Search..." />
-      <select name="filter" onChange={onCategoryChange}>
-        <option value="All">Filter by category</option>
-        <option value="Produce">Produce</option>
-        <option value="Dairy">Dairy</option>
-        <option value="Dessert">Dessert</option>
-      </select>
+      <input
+        type="text"
+        placeholder="Search"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
     </div>
   );
 }
